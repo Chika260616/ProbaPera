@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    table.borderless td,table.borderless th{
+       border: none !important;
+    }
+</style>
+
+ <section>
+    <div class="row" id="tablerow">
+    <div class="col-md-8 col-xs-12">
+      <table class="table">
+        <tr>
+          <td><h4>Order Summary</h4></td>
+        </tr>
+        <tr>
+          <td>
+            {% for item in order.get_cart_items %}
+              <tr>
+                <td>{{ item }}</td>
+                <td>R {{ item.product.price }}</td>
+              </tr>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Order Total</strong> </td>
+          <td> <strong>R {{ order.get_cart_total }}</strong></td>
+        </tr>
+      </table>
+        <form method="POST" action="{% url 'shopping_cart:process_payment' order.id %}">
+          {% csrf_token %}
+          <button style="width: 100%; float: left;" class="btn btn-warning">Забронировать</button>
+          
+        </form>
+        <!-- for another day -->
+        
+    </div>
+   </div>
+  <!-- </form> -->
+ </section>
+{% endblock content %}
+
+{% block scripts %}
+  {{ block.super }}
+
+  <!-- initialize jQuery Library -->
+  <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+  <!-- Bootstrap jQuery -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+      
+{% endblock scripts %}
+

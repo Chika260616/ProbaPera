@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ message }}
+    <div class="row">
+    {% for object in object_list %}
+        <div class="col-sm-3">
+            <p>{{ object.name }}</p>
+            <p>Price: R{{ object.price }}</p>
+            {% if object in user.profile.ebooks.all %}
+            <!-- add a button here to see the product -->
+            You own this
+            {% else %}
+            <a href="{% url 'shopping_cart:add_to_cart' object.id %}" class="btn btn-warning">Забронировать</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}
