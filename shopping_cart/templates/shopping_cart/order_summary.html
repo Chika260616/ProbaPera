@@ -8,7 +8,6 @@
       <tr class="text-center">
         <th>no.</th>
         <th>Item</th>
-        <th>Price</th>
       </tr>
       {% for item in order.get_cart_items %}
         <tr>
@@ -21,7 +20,7 @@
               </a>
             </span>
           </td>
-          <td>{{ item.product.price }}</td>
+          
         </tr>
       {% empty %}
         <tr>
@@ -29,20 +28,9 @@
         </tr>
       {% endfor %}
       <tr>
-        {% if order.get_cart_total != None %}
-        <td colspan=2>
-          <strong class="pull-right">Order Total:</strong>
-        </td>
-        
-        <td colspan= 1>
-          R<strong>{{ order.get_cart_total }}</strong>
-        </td>
-        {% endif %}
-      </tr>
-      <tr>
         <td colspan=3>
           {% if order.get_cart_items %}
-            <a href="{% url 'shopping_cart:checkout' %}" class="pull-right btn btn-primary">Proceed To Checkout</a>
+            <a href="{% url 'shopping_cart:process_payment' order.id %}" class="pull-right btn btn-primary">Отправить заявку</a>
           {% endif %}
         </td>
       </tr>

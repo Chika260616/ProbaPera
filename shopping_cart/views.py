@@ -29,9 +29,12 @@ def add_to_cart(request, **kwargs):
     # фильтровать продукты по идентификатору
     product = Product.objects.filter(id=kwargs.get('item_id', "")).first()
     # проверить, владеет ли пользователь уже этим продуктом
+    if Order.objects.filter(owner=user_profile).exists():
+        messages.info(request, 'You already own this ebook')
+        return redirect(reverse('products:product_list')) 
     if product in request.user.profile.ebooks.all():
         messages.info(request, 'You already own this ebook')
-        return redirect(reverse('products:product-list')) 
+        return redirect(reverse('products:product_list')) 
     # создать OrderItem выбранного продукта
     order_item, status = OrderItem.objects.get_or_create(product=product)
     # создать заказ, связанный с пользователем
@@ -110,7 +113,7 @@ def update_transaction_records(request, order_id):
 
     # отправить электронное письмо клиенту
     messages.info(request, "Thank you! Your items have been added to your profile")
-    return redirect(reverse('accounts:my_profile'))
+    return redirect(reverse('products:product_list'))
 
 
 def success(request, **kwargs):

@@ -1,7 +1,8 @@
-import os
 
+from pathlib import Path
+import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +29,9 @@ INSTALLED_APPS = [
 
     'accounts',
     'products',
-    'shopping_cart'
+    'shopping_cart',
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -107,7 +110,14 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Django Authentication
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'products:product_list'
+
+LOGOUT_REDIRECT_URL = 'products:product_list'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
