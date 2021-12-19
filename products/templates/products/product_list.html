@@ -7,15 +7,16 @@
   </div>
   <br>
   <br>
-<div class="container">
     {{ message }}
     {% if user.is_authenticated %}
-    <div>
-    <div class="row">
+    <div class="container">
     {% for object in object_list %}
-        <div class="col-sm-3" id="block">
+        <div class="" id="block">
             <p>{{ object.name }}</p>
-            <p>Price: R{{ object.price }}</p>
+            <div>
+                <p>{{ object.text }}</p>
+            </div>
+            <p>Data:{{ object.data }}</p>
             {% if object in user.profile.ebooks.all %}
             <!-- add a button here to see the product -->
             You own this
@@ -24,14 +25,15 @@
             {% endif %}
         </div>
     {% endfor %}
-    </div>
-    </div>
     {% else %}
-    <div class="row">
+    <div class="">
         {% for object in object_list %}
-            <div class="col-sm-3">
+            <div class="" id="block">
                 <p>{{ object.name }}</p>
-                <p>Price: R{{ object.price }}</p>
+                <div class="paragraph">
+                <p>{{ object.text }}</p>
+                </div>
+                <p>Data:{{ object.data }}</p>
                 {% if object in user.profile.ebooks.all %}
                 <!-- add a button here to see the product -->
                 You own this
@@ -42,5 +44,6 @@
         {% endfor %}
         </div>
     {% endif %}
-    </div>        
+</div>
+           
 {% endblock content %}

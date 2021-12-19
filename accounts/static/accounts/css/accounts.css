@@ -1,7 +1,16 @@
 #footer{
     margin-top: 20%;
+    
 }
 
 #block{
     margin-bottom: 70px;
+    text-align: center;
+}
+
+.paragraph{
+    margin: 3%;
+    padding-right: 15%;
+    width: 50px;
+    color: red;
 }
