@@ -7,43 +7,13 @@
   </div>
   <br>
   <br>
-    {{ message }}
-    {% if user.is_authenticated %}
-    <div class="container">
+    <div>
+    <div class="">
     {% for object in object_list %}
         <div class="" id="block">
+            <p>Заявка на общежитие</p>
             <p>{{ object.name }}</p>
-            <div>
-                <p>{{ object.text }}</p>
-            </div>
-            <p>Data:{{ object.data }}</p>
-            {% if object in user.profile.ebooks.all %}
-            <!-- add a button here to see the product -->
-            You own this
-            {% else %}
-            <a href="{% url 'shopping_cart:add_to_cart' object.id %}" class="btn btn-warning">Забронировать</a>
-            {% endif %}
         </div>
     {% endfor %}
-    {% else %}
-    <div class="">
-        {% for object in object_list %}
-            <div class="" id="block">
-                <p>{{ object.name }}</p>
-                <div class="paragraph">
-                <p>{{ object.text }}</p>
-                </div>
-                <p>Data:{{ object.data }}</p>
-                {% if object in user.profile.ebooks.all %}
-                <!-- add a button here to see the product -->
-                You own this
-                {% else %}
-                <a href="{% url 'accounts:signup' %}" class="btn btn-warning" data-role="disabled">Забронировать</a>
-                {% endif %}
-            </div>
-        {% endfor %}
-        </div>
-    {% endif %}
-</div>
            
 {% endblock content %}

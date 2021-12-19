@@ -6,14 +6,18 @@ from shopping_cart.models import Order
 from django.urls import reverse_lazy
 
 
-# from django.views.generic import CreateView 
-# from django.shortcuts import get_object_or_404
-# from django.urls import reverse_lazy
+from django.views.generic import CreateView 
+from django.shortcuts import get_object_or_404
 
-# class ProductCreateView(CreateView):
-#     model = Product
-#     fields= '__all__'
-#     success_url = reverse_lazy('product_list')
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields= '__all__'
+    success_url = reverse_lazy("products:product_list")
+
+
+def index(request):
+    return render(request, "products/index.html")
 
 def product_list(request):
     object_list = Product.objects.all()
